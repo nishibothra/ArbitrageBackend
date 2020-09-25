@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.forex.Forex;
+import com.forex.ForexService;
 import com.pojo.random_values;
 import com.pojo.result_fx;
 import com.pojo.user_calc_input;
@@ -16,7 +16,7 @@ import com.pojo.user_calc_input;
 public class FX_controller {
 
 	@Autowired
-	Forex forex;
+	ForexService forex;
 	
 	@PostMapping("/fx/calculator")
 	public result_fx arbitrage_check(@RequestBody user_calc_input uci) {

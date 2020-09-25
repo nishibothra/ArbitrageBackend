@@ -8,7 +8,7 @@ import com.pojo.result_fx;
 import com.pojo.user_calc_input;
 
 @Component
-public class ForexImpl implements Forex {
+public class ForexServiceImpl implements ForexService {
 
 	@Override
 	public random_values arbitrage(double amount, double cost) {

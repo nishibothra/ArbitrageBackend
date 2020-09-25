@@ -10,7 +10,7 @@ import com.pojo.result_fx;
 import com.pojo.user_calc_input;
 
 
-public interface Forex {
+public interface ForexService {
 	public random_values arbitrage(double amount,double cost);
 	public parameters rv_generator(double min,double max);
 	public result_fx fx_calculator(user_calc_input ucl); 
