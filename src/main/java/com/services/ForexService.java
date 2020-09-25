@@ -1,4 +1,4 @@
-package com.forex;
+package com.services;
 
 
 import org.springframework.stereotype.Component;
