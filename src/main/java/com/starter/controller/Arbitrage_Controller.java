@@ -29,14 +29,14 @@ public class Arbitrage_Controller {
 	com.starter.services.CashandCarryService cac;
 	
 	
-	@GetMapping("/CashAndCarryArbitrage")
+	@GetMapping("/CAC-Arbitrage")
 	public List<String> decision()
 	{
 		return cac.arbitrage();
 		
 	}
 	
-	@PostMapping("/CashAndCarryArbitrage/Calculator")
+	@PostMapping("/CAC-Arbitrage/Calculator")
 	public List<String> decision2(@RequestBody CashAndCarry c)
 	{
 		
@@ -70,7 +70,7 @@ public class Arbitrage_Controller {
 	@Autowired
 	DataGenerator dg;
 	
-	@GetMapping("/frarbitrage")
+	@GetMapping("/FRA")
 	public Data getArb() {
 		Data d = cal.calculateGainLossLongBorrow(dg.getRandomData(new Data()));
 		d=cal.calculateGainLossLongLend(d);
@@ -78,7 +78,7 @@ public class Arbitrage_Controller {
 
 	}
 	
-	@PostMapping("/fruserin")
+	@PostMapping("/FRA-Input")
 	public Data getCalculation(@RequestBody Data data) {
 		//add cases and make calls base don the cases
 		if(data.getSixByTwelveFRAsk()==0.0) {
