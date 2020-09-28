@@ -62,20 +62,20 @@ public class ForexServiceImpl implements ForexService {
 	    	
 	    	result = "Arbitrage possible with profit";
 	    	choice = "Borrow in Eur and Invest In USD";
-	    	fx_p_l = final_amt-amt_to_return;
+	    	fx_p_l = final_amt-(amt_to_return+cost);
 
 	    }
 	    else if((final_amt_r > (amt_to_return_r + cost ))) {
 	    	
-	    	result = "Arbitrage possible with profit";
+	    	result = "Revese Arbitrage possible with profit";
 	    	choice = "Borrow in USD and Invest In EUR";
-	    	fx_p_l = final_amt_r-amt_to_return_r;
+	    	fx_p_l = final_amt_r-(amt_to_return_r+cost);
 
 	    }
 	    else {
 	    	result = "No arbitrage possible loss =";
 	    	choice="";
-	    	fx_p_l = amt_to_return -final_amt;
+	    	fx_p_l = (amt_to_return+cost) -final_amt;
 //	    	System.out.println("No arbitrage possible loss = " + (amt_to_return-final_amt));
 	    }
 	    
@@ -91,7 +91,9 @@ public class ForexServiceImpl implements ForexService {
 		
 //		Forward Arbitrage
 		double amt_to_return=0,c1_to_c2=0,final_amt=0, c2_eqv_invest=0;
-		double cost=0;
+//		added cost 
+		double cost=0.005*ucl.getAmount();
+		System.out.println(cost);
 		double amt_to_return_r=0,c2_to_c1_r=0,c1_eqv_invest_r=0,final_amt_r=0;
 		
 
@@ -113,25 +115,32 @@ public class ForexServiceImpl implements ForexService {
 	    if(final_amt > (amt_to_return + cost)) {
 	    	
 	    	result = "Arbitrage possible with profit";
-	    	choice = "Borrow in Eur and Invest In USD";
-	    	fx_p_l = final_amt-amt_to_return;
+//	    	choice = "Borrow in Eur and Invest In USD";
+	    	choice = "Borrow in GBP and Invest In CAD";
+	    	fx_p_l = final_amt-(amt_to_return+cost);
+	    	return new result_fx(result,fx_p_l,choice);
 
 	    }
 	    else if((final_amt_r > (amt_to_return_r + cost))) {
 	    	
-	    	result = "Arbitrage possible with profit";
-	    	choice = "Borrow in USD and Invest In EUR";
-	    	fx_p_l = final_amt_r-amt_to_return_r;
+	    	result = "Reverse Arbitrage possible with profit";
+	    	choice = "Borrow in CAD and Invest In GBP";
+	    	fx_p_l = final_amt_r-(amt_to_return_r+cost);
+	    	System.out.println(final_amt_r);
+	    	System.out.println(amt_to_return_r + cost);
+	    	return new result_fx(result,fx_p_l,choice);
 
 	    }
 	    else {
 	    	result = "No arbitrage possible loss =";
 	    	choice="";
-	    	fx_p_l = amt_to_return -final_amt;
+	    	fx_p_l = (amt_to_return+cost) -final_amt;
+	    	
+	    	return new result_fx(result,fx_p_l,choice);
 
 	    }
 	    
-	    return new result_fx(result,fx_p_l,choice);
+	    
 
 }
 
