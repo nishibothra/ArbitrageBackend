@@ -102,10 +102,10 @@ public class ForexServiceImpl implements ForexService {
 		c1_to_c2 = ucl.getAmount()*ucl.getBid_ask().getBid();
 		 c2_eqv_invest = c1_to_c2 + (c1_to_c2 * (ucl.getInt_c2().getBid()/400));
 		final_amt = c2_eqv_invest / ucl.getBid_ask_3().getAsk();
-//		System.out.println(amt_to_return);
-//		System.out.println(c1_to_c2);
-//		System.out.println(c2_eqv_invest);
-//		System.out.println(final_amt);
+		System.out.println(amt_to_return);
+		System.out.println(c1_to_c2);
+		System.out.println(c2_eqv_invest);
+		System.out.println(final_amt);
 	
 		
 //		Reverse Arbitrage -Test Case Validated
@@ -120,7 +120,7 @@ public class ForexServiceImpl implements ForexService {
 	    if(final_amt > (amt_to_return + cost)) {
 	    	
 	    	result = "Arbitrage possible with profit";
-	    	choice = "Borrow in C1 and Invest In C2";
+	    	choice = "Borrow in: " +ucl.getC1() + " and Invest In: " +ucl.getC2();
 	    	fx_p_l = final_amt-(amt_to_return+cost);
 	    	
 	    	return new result_fx(result,fx_p_l,choice);
@@ -128,8 +128,9 @@ public class ForexServiceImpl implements ForexService {
 	    }
 	    else if((final_amt_r > (amt_to_return_r + cost))) {
 	    	
-	    	result = "Reverse Arbitrage possible with profit";
-	    	choice = "Borrow in C2 and Invest In C1";
+//	    	Might wanna add Reverse key word
+	    	result = "Arbitrage possible with profit"; 
+	    	choice = "Borrow in: " +ucl.getC2() + " and Invest In: " +ucl.getC1();
 	    	fx_p_l = final_amt_r-(amt_to_return_r+cost);
 	    	System.out.println((amt_to_return+cost)-final_amt);
 	    	
