@@ -15,7 +15,7 @@ public class FRAServiceImpl implements FRAService {
 		double getAfterTwel = getAfterSix * (1 + (data.getSixBytwelveFRBid()) / 200);
 
 		data.setGainLossLongBorrow(getAfterTwel - retAfterTwel - data.getTransactionCost());
-		if(data.getGainLossLongBorrow()>0.1) data.setIsArbitrageLongBorrow(true);
+		if(data.getGainLossLongBorrow()>0.0001) data.setIsArbitrageLongBorrow(true);
 
 		return data;
 	}
@@ -28,7 +28,7 @@ public class FRAServiceImpl implements FRAService {
 		double retAfterTwel = retAfterSix * (1 + (data.getSixByTwelveFRAsk()) / 200);
 		data.setGainLossLongLend(getAfterTwel - retAfterTwel - data.getTransactionCost());
 		
-		if(data.getGainLossLongLend()>0.1) data.setIsArbitrageLongLend(true);
+		if(data.getGainLossLongLend()>0.0001) data.setIsArbitrageLongLend(true);
 		
 		return data;
 	}
@@ -42,7 +42,7 @@ public class FRAServiceImpl implements FRAService {
 		data.setSixByTwelveFRAsk(sixByTwelveFRAsk);
 		//double retAfterTwel = retAfterSix * (1 + sixByTwelveFRAsk / 200);
 		//data.setGainLossLongLend(getAfterTwel - retAfterTwel - data.getTransactionCost());
-		if(data.getGainLossLongLend()>0.1) data.setIsArbitrageLongLend(true);
+		if(data.getGainLossLongLend()>0.0001) data.setIsArbitrageLongLend(true);
 		
 		return data;
 	}
@@ -57,7 +57,7 @@ public class FRAServiceImpl implements FRAService {
 		//double getAfterTwel = getAfterSix * (1 + sixByTwelveFRBid / 200);
 
 		//data.setGainLossLongBorrow(getAfterTwel - retAfterTwel - data.getTransactionCost());
-		if(data.getGainLossLongBorrow()>0.1) data.setIsArbitrageLongBorrow(true);
+		if(data.getGainLossLongBorrow()>0.0001) data.setIsArbitrageLongBorrow(true);
 		
 	
 		return data;

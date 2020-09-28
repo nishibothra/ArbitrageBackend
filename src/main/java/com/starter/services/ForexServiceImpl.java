@@ -51,7 +51,7 @@ public class ForexServiceImpl implements ForexService {
 		final_amt = c2_eqv_invest / bid_3m;
 //		Reverse Arbitrage
 	    amt_to_return_r = amount + (amount * (int_c2_ask/400));
-	    c2_to_c1_r = amount/bid_spot;
+	    c2_to_c1_r = amount/ask_spot;
 	    c1_eqv_invest_r = c2_to_c1_r + (c2_to_c1_r * (int_c1_bid/400));
 	    final_amt_r = c1_eqv_invest_r * bid_3m;
 	    
@@ -61,14 +61,14 @@ public class ForexServiceImpl implements ForexService {
 	    if(final_amt > (amt_to_return + cost )) {
 	    	
 	    	result = "Arbitrage possible with profit";
-	    	choice = "Borrow in Eur and Invest In USD";
+	    	choice = "Borrow in C1 and Invest In C2";
 	    	fx_p_l = final_amt-(amt_to_return+cost);
 
 	    }
 	    else if((final_amt_r > (amt_to_return_r + cost ))) {
 	    	
 	    	result = "Revese Arbitrage possible with profit";
-	    	choice = "Borrow in USD and Invest In EUR";
+	    	choice = "Borrow in C2 and Invest In C1";
 	    	fx_p_l = final_amt_r-(amt_to_return_r+cost);
 
 	    }
@@ -92,7 +92,8 @@ public class ForexServiceImpl implements ForexService {
 //		Forward Arbitrage
 		double amt_to_return=0,c1_to_c2=0,final_amt=0, c2_eqv_invest=0;
 //		added cost 
-		double cost=0.005*ucl.getAmount();
+//		double cost=0.005*ucl.getAmount();
+		double cost =0;
 		System.out.println(cost);
 		double amt_to_return_r=0,c2_to_c1_r=0,c1_eqv_invest_r=0,final_amt_r=0;
 		
@@ -101,22 +102,24 @@ public class ForexServiceImpl implements ForexService {
 		c1_to_c2 = ucl.getAmount()*ucl.getBid_ask().getBid();
 		 c2_eqv_invest = c1_to_c2 + (c1_to_c2 * (ucl.getInt_c2().getBid()/400));
 		final_amt = c2_eqv_invest / ucl.getBid_ask_3().getBid();
+//		System.out.println(amt_to_return);
+//		System.out.println(c1_to_c2);
+//		System.out.println(c2_eqv_invest);
+//		System.out.println(final_amt);
 		
-//		Reverse Arbitrage
-		
+//		Reverse Arbitrage -Test Case Validated
 		amt_to_return_r = ucl.getAmount() + (ucl.getAmount() * (ucl.getInt_c2().getAsk()/400));
-	    c2_to_c1_r = ucl.getAmount()/ucl.getBid_ask().getBid();
+	    c2_to_c1_r = ucl.getAmount()/ucl.getBid_ask().getAsk();
 	    c1_eqv_invest_r = c2_to_c1_r + (c2_to_c1_r * (ucl.getInt_c1().getBid()/400));
-	    final_amt_r = c1_eqv_invest_r * ucl.getBid_ask_3().getBid();
-	    
+	    final_amt_r = c1_eqv_invest_r * ucl.getBid_ask_3().getBid(); 
+		
 	    String result="";
 	    double fx_p_l=0;
 	    String choice="";
 	    if(final_amt > (amt_to_return + cost)) {
 	    	
 	    	result = "Arbitrage possible with profit";
-//	    	choice = "Borrow in Eur and Invest In USD";
-	    	choice = "Borrow in GBP and Invest In CAD";
+	    	choice = "Borrow in C1 and Invest In C2";
 	    	fx_p_l = final_amt-(amt_to_return+cost);
 	    	return new result_fx(result,fx_p_l,choice);
 
@@ -124,15 +127,14 @@ public class ForexServiceImpl implements ForexService {
 	    else if((final_amt_r > (amt_to_return_r + cost))) {
 	    	
 	    	result = "Reverse Arbitrage possible with profit";
-	    	choice = "Borrow in CAD and Invest In GBP";
+	    	choice = "Borrow in C2 and Invest In C1";
 	    	fx_p_l = final_amt_r-(amt_to_return_r+cost);
-	    	System.out.println(final_amt_r);
-	    	System.out.println(amt_to_return_r + cost);
+	    	System.out.println((amt_to_return+cost)-final_amt);
 	    	return new result_fx(result,fx_p_l,choice);
 
 	    }
 	    else {
-	    	result = "No arbitrage possible loss =";
+	    	result = "No arbitrage possible loss";
 	    	choice="";
 	    	fx_p_l = (amt_to_return+cost) -final_amt;
 	    	
