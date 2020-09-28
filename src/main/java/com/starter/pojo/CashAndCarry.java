@@ -1,4 +1,4 @@
-package com.pojo;
+package com.starter.pojo;
 
 public class CashAndCarry {
 	private double spotPrice, futurePrice;

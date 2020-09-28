@@ -1,11 +1,11 @@
-package com.services;
+package com.starter.services;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.pojo.CashAndCarry;
+import com.starter.pojo.CashAndCarry;
 
 @Component
 public class CashandCarryServiceImpl implements CashandCarryService{

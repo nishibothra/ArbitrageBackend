@@ -1,8 +1,8 @@
-package com.services;
+package com.starter.services;
 
 import org.springframework.stereotype.Component;
 
-import com.pojo.Data;
+import com.starter.pojo.Data;
 
 @Component
 public class FRAServiceImpl implements FRAService {

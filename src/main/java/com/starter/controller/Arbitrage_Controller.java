@@ -1,4 +1,4 @@
-package com.controller;
+package com.starter.controller;
 
 import java.util.List;
 
@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pojo.CashAndCarry;
-import com.pojo.Data;
-import com.pojo.random_values;
-import com.pojo.result_fx;
-import com.pojo.user_calc_input;
-import com.randomdata.DataGenerator;
-import com.services.ForexService;
+import com.starter.pojo.CashAndCarry;
+import com.starter.pojo.Data;
+import com.starter.pojo.random_values;
+import com.starter.pojo.result_fx;
+import com.starter.pojo.user_calc_input;
+import com.starter.randomdata.DataGenerator;
+import com.starter.services.ForexService;
 
 @CrossOrigin
 @RestController
@@ -25,7 +25,7 @@ public class Arbitrage_Controller {
 
 // <---------------------------------------Cash and Carry Controller------------------------------------------>
 	@Autowired
-	com.services.CashandCarryService cac;
+	com.starter.services.CashandCarryService cac;
 	
 	
 	@GetMapping("/CashAndCarryArbitrage")
@@ -61,7 +61,7 @@ public class Arbitrage_Controller {
 //	<-------------------------------------------FRA Controller---------------------------------------------------->
 	 
 	@Autowired
-	com.services.FRAService cal;
+	com.starter.services.FRAService cal;
 	
 	@Autowired
 	DataGenerator dg;

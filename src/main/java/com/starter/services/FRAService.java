@@ -1,6 +1,6 @@
-package com.services;
+package com.starter.services;
 
-import com.pojo.Data;
+import com.starter.pojo.Data;
 
 public interface FRAService {
 

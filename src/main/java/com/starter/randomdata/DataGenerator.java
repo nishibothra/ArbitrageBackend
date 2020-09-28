@@ -1,4 +1,4 @@
-package com.randomdata;
+package com.starter.randomdata;
 
 import java.util.Random;
 import java.util.stream.DoubleStream;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-import com.pojo.Data;
+import com.starter.pojo.Data;
 
 @Component
 public class DataGenerator {

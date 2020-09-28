@@ -1,9 +1,9 @@
-package com.services;
+package com.starter.services;
 
 import java.util.List;
 import org.springframework.stereotype.Component;
 
-import com.pojo.CashAndCarry;
+import com.starter.pojo.CashAndCarry;
 
 public interface CashandCarryService {
 	public List<String> arbitrage();

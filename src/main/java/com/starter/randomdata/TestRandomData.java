@@ -1,6 +1,6 @@
-package com.randomdata;
+package com.starter.randomdata;
 
-import com.pojo.Data;
+import com.starter.pojo.Data;
 
 public class TestRandomData {
 	
