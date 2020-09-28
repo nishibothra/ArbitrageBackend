@@ -1,19 +1,23 @@
 package com.starter.services;
 
+import java.text.DecimalFormat;
+
 import org.springframework.stereotype.Component;
 
-import com.starter.pojo.parameters;
-import com.starter.pojo.random_values;
-import com.starter.pojo.result_fx;
-import com.starter.pojo.user_calc_input;
+import com.starter.pojo.Parameters;
+import com.starter.pojo.Random_Values_fx;
+import com.starter.pojo.Result_fx;
+import com.starter.pojo.User_Calc_Input;
 
 @Component
 public class ForexServiceImpl implements ForexService {
 
+	private static DecimalFormat df2 = new DecimalFormat("#.##");
+	
 	@Override
-	public random_values arbitrage(double amount, double cost) {
+	public Random_Values_fx arbitrage(double amount, double cost) {
 		// TODO Auto-generated method stub
-//		Fix a value for cost
+
 //		double cost;
 		double bid_spot=0,ask_spot=0;
 		double bid_3m,ask_3m;
@@ -22,98 +26,100 @@ public class ForexServiceImpl implements ForexService {
 		double amt_to_return=0,c1_to_c2=0,final_amt=0;
 		
 		double amt_to_return_r=0,c2_to_c1_r=0,c1_eqv_invest_r=0,final_amt_r=0;
-		parameters p = null;
+		Parameters p = null;
 		
-		random_values rmv ;
-//		Getting spot bid and ask rate
+		Random_Values_fx rmv ;
+//		Getting spot bid and ask rate 
 		p=rv_generator(1.0,1.4);
-		bid_spot = p.getBid();
-		ask_spot=p.getAsk();
-//		Getting bid and ask rate of 3M forward
+		bid_spot =Double.parseDouble(df2.format(p.getBid())) ;
+		ask_spot=Double.parseDouble(df2.format(p.getAsk())) ;  
+//		Getting bid and ask rate of 3M forward rate
 		p=rv_generator(1.0,1.4);
-		bid_3m = p.getBid();
-		ask_3m=p.getAsk();
-//		Getting interest rate in C1 for bid and ask
+		bid_3m =Double.parseDouble(df2.format(p.getBid())) ;
+		ask_3m=Double.parseDouble(df2.format(p.getAsk())) ; 
+//		Getting interest rate in Country 1 for bid and ask
 		p=rv_generator(1.82,5.75);
-		int_c1_bid = p.getBid();
-		int_c1_ask=p.getAsk();
-//		Getting interest rate in C2 for bid and ask
+		int_c1_bid = Double.parseDouble(df2.format(p.getBid())) ;
+		int_c1_ask= Double.parseDouble(df2.format(p.getAsk())) ; 
+//		Getting interest rate in Country 2 for bid and ask
 		p=rv_generator(0.2,6.0);
-		int_c2_bid = p.getBid();
-		int_c2_ask=p.getAsk();
+		int_c2_bid =  Double.parseDouble(df2.format(p.getBid())) ;
+		int_c2_ask= Double.parseDouble(df2.format(p.getAsk())) ; 
 		
 		
 		
-//		Calculating Forward Arbitrage
+//		Forward Arbitrage Calculations
 		amt_to_return = amount + (amount * (int_c1_ask/400));
 		c1_to_c2 = amount*bid_spot;
 		double c2_eqv_invest = c1_to_c2 + (c1_to_c2 * (int_c2_bid/400));
 		final_amt = c2_eqv_invest / ask_3m;
 		
-//		Reverse Arbitrage
+//		Reverse Arbitrage Calculations
 	    amt_to_return_r = amount + (amount * (int_c2_ask/400));
 	    c2_to_c1_r = amount/ask_spot;
 	    c1_eqv_invest_r = c2_to_c1_r + (c2_to_c1_r * (int_c1_bid/400));
 	    final_amt_r = c1_eqv_invest_r * bid_3m;
-	    
+	   
+//	    Variable declaration for result json
 	    String result="";
 	    double fx_p_l=0;
 	    String choice="";
 	    if(final_amt > (amt_to_return + cost )) {
 	    	
 	    	result = "Arbitrage possible with profit";
-	    	choice = "Borrow in C1 and Invest In C2";
-	    	fx_p_l = final_amt-(amt_to_return+cost);
+	    	choice = "Borrow in EUR and Invest In USD";
+	    	fx_p_l =  Double.parseDouble(df2.format(final_amt-(amt_to_return+cost)));
 
 	    }
 	    else if((final_amt_r > (amt_to_return_r + cost ))) {
 	    	
 	    	result = "Revese Arbitrage possible with profit";
-	    	choice = "Borrow in C2 and Invest In C1";
-	    	fx_p_l = final_amt_r-(amt_to_return_r+cost);
+	    	choice = "Borrow in USD and Invest In EUR";
+	    	fx_p_l = Double.parseDouble(df2.format(final_amt_r-(amt_to_return_r+cost)));
 
 	    }
 	    else {
-	    	result = "No arbitrage possible loss =";
-	    	choice="";
-	    	fx_p_l = (amt_to_return+cost) -final_amt;
-//	    	System.out.println("No arbitrage possible loss = " + (amt_to_return-final_amt));
+	    	result = "No arbitrage possible loss";
+	    	choice=  "";
+	    	fx_p_l =  -Double.parseDouble(df2.format((amt_to_return+cost) -final_amt));;
 	    }
 	    
-	    return new random_values(new result_fx(result, fx_p_l, choice), new parameters(bid_spot,ask_spot),new parameters(bid_3m,ask_3m),new parameters(int_c1_bid,int_c1_ask), new parameters(int_c2_bid,int_c2_ask));
+	    return new Random_Values_fx(new Result_fx(result, fx_p_l, choice), new Parameters(bid_spot,ask_spot),new Parameters(bid_3m,ask_3m),new Parameters(int_c1_bid,int_c1_ask), new Parameters(int_c2_bid,int_c2_ask));
 	}
 	
 	
 	
 
 	@Override
-	public result_fx fx_calculator(user_calc_input ucl) {
+	public Result_fx fx_calculator(User_Calc_Input ucl) {
 		// TODO Auto-generated method stub
 		
-//		Forward Arbitrage
+//		Forward Arbitrage Algorithm Variables
 		double amt_to_return=0,c1_to_c2=0,final_amt=0, c2_eqv_invest=0;
-//		added cost 
 //		double cost=0.005*ucl.getAmount();
 		double cost =0;
 		double amt_to_return_r=0,c2_to_c1_r=0,c1_eqv_invest_r=0,final_amt_r=0;
 		
-// Test Case Validated
+// 	    Forward Arbitrage Calculations
 		amt_to_return = ucl.getAmount() + (ucl.getAmount() * (ucl.getInt_c1().getAsk()/400));
 		c1_to_c2 = ucl.getAmount()*ucl.getBid_ask().getBid();
 		 c2_eqv_invest = c1_to_c2 + (c1_to_c2 * (ucl.getInt_c2().getBid()/400));
 		final_amt = c2_eqv_invest / ucl.getBid_ask_3().getAsk();
-		System.out.println(amt_to_return);
-		System.out.println(c1_to_c2);
-		System.out.println(c2_eqv_invest);
-		System.out.println(final_amt);
+		
+//		Sys out statements to validate the answers
+//		System.out.println(amt_to_return);
+//		System.out.println(c1_to_c2);
+//		System.out.println(c2_eqv_invest);
+//		System.out.println(final_amt);
 	
 		
-//		Reverse Arbitrage -Test Case Validated
+//		Reverse Arbitrage Calculations 
 		amt_to_return_r = ucl.getAmount() + (ucl.getAmount() * (ucl.getInt_c2().getAsk()/400));
 	    c2_to_c1_r = ucl.getAmount()/ucl.getBid_ask().getAsk();
 	    c1_eqv_invest_r = c2_to_c1_r + (c2_to_c1_r * (ucl.getInt_c1().getBid()/400));
 	    final_amt_r = c1_eqv_invest_r * ucl.getBid_ask_3().getBid(); 
 		
+//	    Variable declaration for Result json
 	    String result="";
 	    double fx_p_l=0;
 	    String choice="";
@@ -121,28 +127,27 @@ public class ForexServiceImpl implements ForexService {
 	    	
 	    	result = "Arbitrage possible with profit";
 	    	choice = "Borrow in: " +ucl.getC1() + " and Invest In: " +ucl.getC2();
-	    	fx_p_l = final_amt-(amt_to_return+cost);
+	    	fx_p_l = Double.parseDouble(df2.format(final_amt-(amt_to_return+cost)));
 	    	
-	    	return new result_fx(result,fx_p_l,choice);
+	    	return new Result_fx(result,fx_p_l,choice);
 
 	    }
 	    else if((final_amt_r > (amt_to_return_r + cost))) {
 	    	
-//	    	Might wanna add Reverse key word
 	    	result = "Arbitrage possible with profit"; 
 	    	choice = "Borrow in: " +ucl.getC2() + " and Invest In: " +ucl.getC1();
-	    	fx_p_l = final_amt_r-(amt_to_return_r+cost);
-	    	System.out.println((amt_to_return+cost)-final_amt);
+	    	fx_p_l =  Double.parseDouble(df2.format(final_amt_r-(amt_to_return_r+cost)));
+//	    	System.out.println((amt_to_return+cost)-final_amt);
 	    	
-	    	return new result_fx(result,fx_p_l,choice);
+	    	return new Result_fx(result,fx_p_l,choice);
 
 	    }
 	    else {
 	    	result = "No arbitrage possible loss";
-	    	choice="";
-	    	fx_p_l = (amt_to_return+cost) -final_amt;
+	    	choice=  "";
+	    	fx_p_l = - Double.parseDouble(df2.format((amt_to_return+cost) -final_amt));;
 	    	
-	    	return new result_fx(result,fx_p_l,choice);
+	    	return new Result_fx(result,fx_p_l,choice);
 
 	    }
 	    
@@ -151,10 +156,10 @@ public class ForexServiceImpl implements ForexService {
 }
 
 
-
+// Random value Generator and extrapolating to required range
 
 	@Override
-	public parameters rv_generator(double min, double max) {
+	public Parameters rv_generator(double min, double max) {
 		double value=0,ask=0,bid=Integer.MAX_VALUE;
 		value = Math.random();
 		ask = min+(value*(max-min));
@@ -163,7 +168,7 @@ public class ForexServiceImpl implements ForexService {
 			bid=min+(value*(max-min));
 		}
 			  
-		return new parameters(bid,ask);
+		return new Parameters(bid,ask);
 	}
 
 }

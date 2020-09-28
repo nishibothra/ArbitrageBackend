@@ -1,11 +1,15 @@
 package com.starter.pojo;
 
-public class result_fx {
+public class Result_fx {
 	private String result;
 	private double fx_p_l;
 	private String choice;
 	
-	public result_fx(String result, double fx_p_l, String choice) {
+	
+	public Result_fx() {
+		super();
+	}
+	public Result_fx(String result, double fx_p_l, String choice) {
 		super();
 		this.result = result;
 		this.fx_p_l = fx_p_l;
