@@ -1,18 +1,18 @@
 package com.starter.pojo;
 
-public class Parameters {
+public class Parameters_fx {
 
 	private double bid,ask;
 
 	
-	public Parameters(double bid, double ask) {
+	public Parameters_fx(double bid, double ask) {
 		super();
 		this.bid = bid;
 		this.ask = ask;
 	}
 	
 	
-	public Parameters() {
+	public Parameters_fx() {
 		super();
 	}
 

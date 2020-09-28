@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.starter.pojo.CashAndCarry;
 import com.starter.pojo.Data;
-import com.starter.pojo.Parameters;
+import com.starter.pojo.Parameters_fx;
 import com.starter.pojo.Random_Values_fx;
 import com.starter.pojo.Result_fx;
-import com.starter.pojo.User_Calc_Input;
+import com.starter.pojo.User_Calc_Input_fx;
 import com.starter.randomdata.DataGenerator;
 import com.starter.services.ForexService;
 
@@ -47,7 +47,7 @@ public class Arbitrage_Controller {
 	ForexService forex;
 	
 	@PostMapping("/fx/calculator")
-	public Result_fx arbitrage_check(@RequestBody User_Calc_Input uci) {
+	public Result_fx arbitrage_check(@RequestBody User_Calc_Input_fx uci) {
 		Result_fx res = forex.fx_calculator(uci);
 		return res;
 	

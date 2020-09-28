@@ -4,10 +4,10 @@ import java.text.DecimalFormat;
 
 import org.springframework.stereotype.Component;
 
-import com.starter.pojo.Parameters;
+import com.starter.pojo.Parameters_fx;
 import com.starter.pojo.Random_Values_fx;
 import com.starter.pojo.Result_fx;
-import com.starter.pojo.User_Calc_Input;
+import com.starter.pojo.User_Calc_Input_fx;
 
 @Component
 public class ForexServiceImpl implements ForexService {
@@ -26,7 +26,7 @@ public class ForexServiceImpl implements ForexService {
 		double amt_to_return=0,c1_to_c2=0,final_amt=0;
 		
 		double amt_to_return_r=0,c2_to_c1_r=0,c1_eqv_invest_r=0,final_amt_r=0;
-		Parameters p = null;
+		Parameters_fx p = null;
 		
 		Random_Values_fx rmv ;
 //		Getting spot bid and ask rate 
@@ -84,14 +84,14 @@ public class ForexServiceImpl implements ForexService {
 	    	fx_p_l =  -Double.parseDouble(df2.format((amt_to_return+cost) -final_amt));;
 	    }
 	    
-	    return new Random_Values_fx(new Result_fx(result, fx_p_l, choice), new Parameters(bid_spot,ask_spot),new Parameters(bid_3m,ask_3m),new Parameters(int_c1_bid,int_c1_ask), new Parameters(int_c2_bid,int_c2_ask));
+	    return new Random_Values_fx(new Result_fx(result, fx_p_l, choice), new Parameters_fx(bid_spot,ask_spot),new Parameters_fx(bid_3m,ask_3m),new Parameters_fx(int_c1_bid,int_c1_ask), new Parameters_fx(int_c2_bid,int_c2_ask));
 	}
 	
 	
 	
 
 	@Override
-	public Result_fx fx_calculator(User_Calc_Input ucl) {
+	public Result_fx fx_calculator(User_Calc_Input_fx ucl) {
 		// TODO Auto-generated method stub
 		
 //		Forward Arbitrage Algorithm Variables
@@ -159,7 +159,7 @@ public class ForexServiceImpl implements ForexService {
 // Random value Generator and extrapolating to required range
 
 	@Override
-	public Parameters rv_generator(double min, double max) {
+	public Parameters_fx rv_generator(double min, double max) {
 		double value=0,ask=0,bid=Integer.MAX_VALUE;
 		value = Math.random();
 		ask = min+(value*(max-min));
@@ -168,7 +168,7 @@ public class ForexServiceImpl implements ForexService {
 			bid=min+(value*(max-min));
 		}
 			  
-		return new Parameters(bid,ask);
+		return new Parameters_fx(bid,ask);
 	}
 
 }
