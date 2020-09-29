@@ -1,6 +1,13 @@
 package com.starter.pojo;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+
 public class Random_Values_fx {
+	
+	private int TransId;
+	
 	private Result_fx res;
 	private Parameters_fx bid_ask;
 	private Parameters_fx bid_ask_3;

@@ -2,12 +2,14 @@ package com.starter.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.starter.pojo.CashAndCarry;
@@ -15,12 +17,16 @@ import com.starter.pojo.Data;
 import com.starter.pojo.Parameters_fx;
 import com.starter.pojo.Random_Values_fx;
 import com.starter.pojo.Result_fx;
+import com.starter.pojo.Result_fx_db;
 import com.starter.pojo.User_Calc_Input_fx;
 import com.starter.randomdata.DataGenerator;
+import com.starter.repo.ForexRepo;
 import com.starter.services.ForexService;
 
-@CrossOrigin
+
+@CrossOrigin(origins="*")
 @RestController
+@RequestMapping(value="/arbitrage")
 public class Arbitrage_Controller {
 
 
@@ -29,14 +35,14 @@ public class Arbitrage_Controller {
 	com.starter.services.CashandCarryService cac;
 	
 	
-	@GetMapping("/cac-arbitrage")
+	@GetMapping("/cac")
 	public CashAndCarry randomValueArbitrage()
 	{
 		return cac.arbitrage();
 		
 	}
 	
-	@PostMapping("/cac-arbitrage/calculator")
+	@PostMapping("/cac/calculator")
 	public CashAndCarry calculatorArbitrage(@RequestBody CashAndCarry c)
 	{
 		
@@ -47,6 +53,9 @@ public class Arbitrage_Controller {
 	@Autowired
 	ForexService forex;
 	
+	@Autowired
+	ForexRepo forexRepo;
+	
 	@PostMapping("/fx/calculator")
 	public Result_fx arbitrage_check(@RequestBody User_Calc_Input_fx uci) {
 		Result_fx res = forex.fx_calculator(uci);
@@ -54,6 +63,12 @@ public class Arbitrage_Controller {
 	
 	}
 	
+	@GetMapping("/fx/history")
+	public Iterable<Result_fx_db> forex_history() {
+		Iterable<Result_fx_db> res =  forexRepo.findAll();
+		return res;
+		
+	}
 	@GetMapping("/fx/{amount}")
 	public Random_Values_fx arbitrage_random(@PathVariable double amount) {
 		double cost=0;
@@ -71,7 +86,7 @@ public class Arbitrage_Controller {
 	@Autowired
 	DataGenerator dg;
 	
-	@GetMapping("/FRA")
+	@GetMapping("/fra")
 	public Data getArb() {
 		Data d = cal.calculateGainLossLongBorrow(dg.getRandomData(new Data()));
 		d=cal.calculateGainLossLongLend(d);
@@ -79,7 +94,7 @@ public class Arbitrage_Controller {
 
 	}
 	
-	@PostMapping("/FRA-Input")
+	@PostMapping("/fra/calculator")
 	public Data getCalculation(@RequestBody Data data) {
 		//add cases and make calls base don the cases
 		if(data.getSixByTwelveFRAsk()==0.0) {
