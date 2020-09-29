@@ -1,6 +1,6 @@
 package com.starter.pojo;
 
-public class Data {
+public class FRAData {
 	
 	private double principleAmount;
 
@@ -50,7 +50,7 @@ public class Data {
 
 
 
-	public Data() {
+	public FRAData() {
 		
 	}
 	
@@ -110,7 +110,7 @@ public class Data {
 
 
 
-	public Data(double principleAmount, double transactionCost, double sixMonthsSpotAsk, double sixMonthsSpotBid,
+	public FRAData(double principleAmount, double transactionCost, double sixMonthsSpotAsk, double sixMonthsSpotBid,
 			double twelveMonthSpotAsk, double twelveMonthSpotBid, double sixByTwelveFRAsk, double sixBytwelveFRBid,
 			double gainLossLongBorrow, double gainLossLongLend, boolean isArbitrageLongBorrow,
 			boolean isArbitrageLongLend) {

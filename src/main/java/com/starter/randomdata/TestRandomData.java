@@ -1,6 +1,6 @@
 package com.starter.randomdata;
 
-import com.starter.pojo.Data;
+import com.starter.pojo.FRAData;
 
 public class TestRandomData {
 	
@@ -8,7 +8,7 @@ public class TestRandomData {
 		DataGenerator dataGenerator;
 		for(int i=0;i<100;i++) {
 			dataGenerator = new DataGenerator();
-			System.out.println("SR#"+i+"  "+dataGenerator.getRandomData(new Data()));
+			System.out.println("SR#"+i+"  "+dataGenerator.getRandomData(new FRAData()));
 			dataGenerator=null;
 		}
 	}

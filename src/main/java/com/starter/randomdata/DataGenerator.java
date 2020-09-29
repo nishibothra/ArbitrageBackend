@@ -7,12 +7,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-import com.starter.pojo.Data;
+import com.starter.pojo.FRAData;
 
 @Component
 public class DataGenerator {
 
-	public Data getRandomData(Data data) {
+	public FRAData getRandomData(FRAData data) {
 		// for six Months spot the range is 0.5 to 1.3 and ask bid diffrence is 0.05 - 0.25
 		
 		// for 12 Months spot rates range is sixMonths(+0.5or -0.1) ask bid diffrence is

@@ -1,11 +1,11 @@
 package com.starter.services;
 
-import com.starter.pojo.Data;
+import com.starter.pojo.FRAData;
 
 public interface FRAService {
 
-	public Data calculateGainLossLongBorrow(Data data);
-	public Data calculateGainLossLongLend(Data data);
-	public Data calculateUserInLongLend(Data data);
-	public Data calculateUserInLongBorrow(Data data);
+	public FRAData calculateGainLossLongBorrow(FRAData data);
+	public FRAData calculateGainLossLongLend(FRAData data);
+	public FRAData calculateUserInLongLend(FRAData data);
+	public FRAData calculateUserInLongBorrow(FRAData data);
 }

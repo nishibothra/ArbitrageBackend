@@ -1,5 +1,7 @@
 package com.starter.controller;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 
@@ -13,13 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.starter.pojo.CashAndCarry;
-import com.starter.pojo.Data;
+import com.starter.pojo.FRAData;
+import com.starter.pojo.FRADataDb;
 import com.starter.pojo.Parameters_fx;
 import com.starter.pojo.Random_Values_fx;
 import com.starter.pojo.Result_fx;
 import com.starter.pojo.Result_fx_db;
 import com.starter.pojo.User_Calc_Input_fx;
 import com.starter.randomdata.DataGenerator;
+import com.starter.repo.FRARepo;
 import com.starter.repo.ForexRepo;
 import com.starter.services.ForexService;
 
@@ -87,28 +91,32 @@ public class Arbitrage_Controller {
 	@Autowired
 	DataGenerator dg;
 	
+	@Autowired
+	FRARepo fraRepo;
+	
 	@GetMapping("/fra")
-	public Data getArb() {
-		Data d = cal.calculateGainLossLongBorrow(dg.getRandomData(new Data()));
+	public FRAData getArb() {
+		FRAData d = cal.calculateGainLossLongBorrow(dg.getRandomData(new FRAData()));
 		d=cal.calculateGainLossLongLend(d);
+		
 		return d;
 
 	}
 	
 	@PostMapping("/fra/calculator")
-	public Data getCalculation(@RequestBody Data data) {
+	public FRAData getCalculation(@RequestBody FRAData data) {
 		//add cases and make calls base don the cases
-		if(data.getSixByTwelveFRAsk()==0.0) {
-			data = cal.calculateUserInLongLend(data);
-		}else {
-			data = cal.calculateGainLossLongLend(data);
-		}
-		if(data.getSixBytwelveFRBid()==0.0) {
-			data = cal.calculateUserInLongBorrow(data);
-		}else {
-			data = cal.calculateGainLossLongBorrow(data);
-		}
+		data = cal.calculateGainLossLongLend(data);
+		data = cal.calculateGainLossLongBorrow(data);
 		
 		return data;
+	}
+	
+	@GetMapping("/fra/history")
+	public Iterable<FRADataDb> fraHistory() {
+//		List<FRADataDb> res =  fraRepo.findAll();
+		List<FRADataDb> top5 = fraRepo.findTop5ByOrderByTransIdDesc();
+		return top5;
+		
 	}
 }
