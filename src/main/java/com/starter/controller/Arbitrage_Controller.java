@@ -65,8 +65,9 @@ public class Arbitrage_Controller {
 	
 	@GetMapping("/fx/history")
 	public Iterable<Result_fx_db> forex_history() {
-		Iterable<Result_fx_db> res =  forexRepo.findAll();
-		return res;
+		List<Result_fx_db> res =  forexRepo.findAll();
+		List<Result_fx_db> top3 = forexRepo.findTop5ByOrderByTransIdDesc();
+		return top3;
 		
 	}
 	@GetMapping("/fx/{amount}")

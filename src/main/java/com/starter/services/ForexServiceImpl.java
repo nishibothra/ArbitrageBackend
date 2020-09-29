@@ -86,9 +86,9 @@ public class ForexServiceImpl implements ForexService {
 	    	choice = "Borrow in EUR and Invest In USD";
 	    	ans.setChoice(choice);
 	    	fx_p_l =  Double.parseDouble(df2.format(final_amt-(amt_to_return+cost)));
-	    	ans.setFx_p_l(fx_p_l);
-	    	ans.setTransId(id_count+1);
-	    	Result_fx_db res = forexRepo.save(ans);
+	    	ans.setProfit(fx_p_l);
+	    	ans.setTransId(++id_count);
+	    	forexRepo.save(ans);
 
 	    }
 	    else if((final_amt_r > (amt_to_return_r + cost ))) {
@@ -98,9 +98,9 @@ public class ForexServiceImpl implements ForexService {
 	    	choice = "Borrow in USD and Invest In EUR";
 	    	ans.setChoice(choice);
 	    	fx_p_l = Double.parseDouble(df2.format(final_amt_r-(amt_to_return_r+cost)));
-	    	ans.setFx_p_l(fx_p_l);
-	    	ans.setTransId(id_count+1);
-	    	Result_fx_db res = forexRepo.save(ans);
+	    	ans.setProfit(fx_p_l);
+	    	ans.setTransId(++id_count);
+	    	forexRepo.save(ans);
 
 	    }
 	    else {

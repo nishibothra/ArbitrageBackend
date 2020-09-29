@@ -12,16 +12,39 @@ public class Result_fx_db {
 	
 	@Id
 //	@GeneratedValue(strategy = GenerationType.AUTO)
-	private double TransId;
+	private double transId;
 	
 	private double bid_spot,ask_spot,bid_3m,ask_3m,int_c1_bid,int_c2_ask,int_c1_ask,int_c2_bid;
 	private String result,choice;
-	private double fx_p_l;
+	private double profit;
+	
+	
+	
+	public Result_fx_db() {
+		super();
+	}
+	public Result_fx_db(double transId, double bid_spot, double ask_spot, double bid_3m, double ask_3m,
+			double int_c1_bid, double int_c2_ask, double int_c1_ask, double int_c2_bid, String result, String choice,
+			double profit) {
+		super();
+		this.transId = transId;
+		this.bid_spot = bid_spot;
+		this.ask_spot = ask_spot;
+		this.bid_3m = bid_3m;
+		this.ask_3m = ask_3m;
+		this.int_c1_bid = int_c1_bid;
+		this.int_c2_ask = int_c2_ask;
+		this.int_c1_ask = int_c1_ask;
+		this.int_c2_bid = int_c2_bid;
+		this.result = result;
+		this.choice = choice;
+		this.profit = profit;
+	}
 	public double getTransId() {
-		return TransId;
+		return transId;
 	}
 	public void setTransId(double transId) {
-		TransId = transId;
+		this.transId = transId;
 	}
 	public double getBid_spot() {
 		return bid_spot;
@@ -83,35 +106,14 @@ public class Result_fx_db {
 	public void setChoice(String choice) {
 		this.choice = choice;
 	}
-	public double getFx_p_l() {
-		return fx_p_l;
+	public double getProfit() {
+		return profit;
 	}
-	public void setFx_p_l(double fx_p_l) {
-		this.fx_p_l = fx_p_l;
-	}
-	
-	public Result_fx_db() {
-		super();
-	}
-	public Result_fx_db(double transId, double bid_spot, double ask_spot, double bid_3m, double ask_3m,
-			double int_c1_bid, double int_c2_ask, double int_c1_ask, double int_c2_bid, String result, String choice,
-			double fx_p_l) {
-		super();
-		TransId = transId;
-		this.bid_spot = bid_spot;
-		this.ask_spot = ask_spot;
-		this.bid_3m = bid_3m;
-		this.ask_3m = ask_3m;
-		this.int_c1_bid = int_c1_bid;
-		this.int_c2_ask = int_c2_ask;
-		this.int_c1_ask = int_c1_ask;
-		this.int_c2_bid = int_c2_bid;
-		this.result = result;
-		this.choice = choice;
-		this.fx_p_l = fx_p_l;
+	public void setProfit(double profit) {
+		this.profit = profit;
 	}
 	public Result_fx_db(double bid_spot, double ask_spot, double bid_3m, double ask_3m, double int_c1_bid,
-			double int_c2_ask, double int_c1_ask, double int_c2_bid, String result, String choice, double fx_p_l) {
+			double int_c2_ask, double int_c1_ask, double int_c2_bid, String result, String choice, double profit) {
 		super();
 		this.bid_spot = bid_spot;
 		this.ask_spot = ask_spot;
@@ -123,8 +125,12 @@ public class Result_fx_db {
 		this.int_c2_bid = int_c2_bid;
 		this.result = result;
 		this.choice = choice;
-		this.fx_p_l = fx_p_l;
+		this.profit = profit;
 	}
 	
-
+	
+	
+	
+	
+	
 }
