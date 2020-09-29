@@ -29,19 +29,20 @@ public class Arbitrage_Controller {
 	com.starter.services.CashandCarryService cac;
 	
 	
-	@GetMapping("/CAC-Arbitrage")
-	public List<String> decision()
+	@GetMapping("/cac-arbitrage")
+	public CashAndCarry randomValueArbitrage()
 	{
 		return cac.arbitrage();
 		
 	}
 	
-	@PostMapping("/CAC-Arbitrage/Calculator")
-	public List<String> decision2(@RequestBody CashAndCarry c)
+	@PostMapping("/cac-arbitrage/calculator")
+	public CashAndCarry calculatorArbitrage(@RequestBody CashAndCarry c)
 	{
 		
 		return cac.Calculator(c);
 	}
+	
 //	<------------------------------------------Forex Controller------------------------------------------------->
 	@Autowired
 	ForexService forex;

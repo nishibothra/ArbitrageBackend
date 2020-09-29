@@ -6,10 +6,10 @@ import org.springframework.stereotype.Component;
 import com.starter.pojo.CashAndCarry;
 
 public interface CashandCarryService {
-	public List<String> arbitrage();
-	public List<String> Calculator(CashAndCarry c);
-	//public List<String> CaandCarry(double spotPrice, double futurePrice, double dur, double ROI);
-	//public List<String> RCandCarry(double spotPrice, double futurePrice, double dur, double ROI);
+	
+	public CashAndCarry arbitrage();
+	public CashAndCarry Calculator(CashAndCarry c);
 	public double randomValueGenerator(double min, double max);
 	public void monthAndRate();
+	
 }
