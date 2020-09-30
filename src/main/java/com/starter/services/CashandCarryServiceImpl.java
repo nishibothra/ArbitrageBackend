@@ -29,7 +29,7 @@ public class CashandCarryServiceImpl implements CashandCarryService{
 	@Override
     public CashAndCarry arbitrage() {
 		stockamt=3000.0;
-		brokerage=0.02;
+		brokerage=0.2;
 		bid_spotPrice=randomValueGenerator(3154,3172);
 		ask_spotPrice=randomValueGenerator(bid_spotPrice+1,3175);
 		bid_futurePrice=randomValueGenerator(3180,3240);
