@@ -8,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import com.starter.pojo.FRADataDb;
 
 
-public interface FRARepo extends JpaRepository<FRADataDb, Timestamp>{
-	List<FRADataDb> findTop5ByOrderByTransIdDesc();
+public interface FRARepo extends JpaRepository<FRADataDb, Integer>{
+	List<FRADataDb> findTop7ByOrderByTransIdDesc();
 
 }

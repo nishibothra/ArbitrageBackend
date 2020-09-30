@@ -1,5 +1,8 @@
 package com.starter.pojo;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 public class FRAData {
 	
 	private double principleAmount;
@@ -17,6 +20,7 @@ public class FRAData {
 	
 	private boolean isArbitrageLongBorrow;
 	private boolean isArbitrageLongLend;
+	
 	
 	public boolean getIsArbitrageLongBorrow() {
 		return isArbitrageLongBorrow;
@@ -51,7 +55,7 @@ public class FRAData {
 
 
 	public FRAData() {
-		
+		 
 	}
 	
 	

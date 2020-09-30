@@ -25,13 +25,13 @@ public class DataGenerator {
 		data.setSixMonthsSpotAsk(sixMAsk);
 		data.setSixMonthsSpotBid(sixMBid);
 
-		Double twelMBid = sixMBid + (0.5) * random.nextDouble() - 0.1 * random.nextDouble();
+		Double twelMBid = sixMBid + (0.6) * random.nextDouble();
 		Double twelMAsk = twelMBid + 0.05 + (0.25) * random.nextDouble();
 
 		data.setTwelveMonthSpotAsk(twelMAsk);
 		data.setTwelveMonthSpotBid(twelMBid);
 
-		Double sixTwelBid = sixMBid + (0.5) * random.nextDouble() - 0.5 * random.nextDouble();
+		Double sixTwelBid = sixMBid + (0.5) * random.nextDouble() ;
 		Double sixTwelAsk = sixTwelBid + 0.05 + (0.25) * random.nextDouble();
 
 		data.setSixByTwelveFRAsk(sixTwelAsk);

@@ -15,12 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.starter.pojo.CashAndCarry;
 //import com.starter.pojo.Data;
 import com.starter.pojo.FRAData;
+import com.starter.pojo.FRADataDb;
 import com.starter.pojo.Parameters_fx;
 import com.starter.pojo.Random_Values_fx;
 import com.starter.pojo.Result_fx;
 import com.starter.pojo.Result_fx_db;
 import com.starter.pojo.User_Calc_Input_fx;
 import com.starter.randomdata.DataGenerator;
+import com.starter.repo.FRARepo;
 import com.starter.repo.ForexRepo;
 import com.starter.services.ForexService;
 
@@ -87,6 +89,9 @@ public class Arbitrage_Controller {
 	@Autowired
 	DataGenerator dg;
 	
+	@Autowired
+	FRARepo fraRepo;
+	
 	@GetMapping("/fra")
 	public FRAData getArb() {
 		FRAData d = cal.calculateGainLossLongBorrow(dg.getRandomData(new FRAData()));
@@ -98,17 +103,16 @@ public class Arbitrage_Controller {
 	@PostMapping("/fra/calculator")
 	public FRAData getCalculation(@RequestBody FRAData data) {
 		//add cases and make calls base don the cases
-		if(data.getSixByTwelveFRAsk()==0.0) {
-			data = cal.calculateUserInLongLend(data);
-		}else {
-			data = cal.calculateGainLossLongLend(data);
-		}
-		if(data.getSixBytwelveFRBid()==0.0) {
-			data = cal.calculateUserInLongBorrow(data);
-		}else {
-			data = cal.calculateGainLossLongBorrow(data);
-		}
-		
+		data = cal.calculateGainLossLongLend(data);
+		data = cal.calculateGainLossLongBorrow(data);	
 		return data;
 	}
+	
+	@GetMapping("/fra/history")
+	public Iterable<FRADataDb> fraHistory() {
+		List<FRADataDb> top7 = fraRepo.findTop7ByOrderByTransIdDesc();
+		return top7;
+		
+	}
+	
 }
