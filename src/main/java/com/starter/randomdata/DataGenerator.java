@@ -13,13 +13,6 @@ import com.starter.pojo.FRAData;
 public class DataGenerator {
 
 	public FRAData getRandomData(FRAData data) {
-		// for six Months spot the range is 0.5 to 1.3 and ask bid diffrence is 0.05 - 0.25
-		
-		// for 12 Months spot rates range is sixMonths(+0.5or -0.1) ask bid diffrence is
-		// 0.05 - 0.30
-		// for 6/12 fra range is sixMonths spot + - 0.5.
-		// for transaction cost 0.1% of principle fixed 
-		// principle for now is 10^(random bet 2 to 8);
 
 		Random random = new Random();
 		

@@ -20,7 +20,7 @@ public class ResultCAC_db {
 	private double transId;
 
 	public ResultCAC_db() {
-		// TODO Auto-generated constructor stub
+
 		super();
 	
 	}

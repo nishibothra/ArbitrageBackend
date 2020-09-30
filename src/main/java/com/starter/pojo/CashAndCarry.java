@@ -10,9 +10,9 @@ public class CashAndCarry {
 	private double profit;
 	
 	
-//	
+
 	public CashAndCarry() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public CashAndCarry(double bsp, double asp,double bfp, double afp, double d,double brate,double arate) {

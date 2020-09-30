@@ -1,6 +1,5 @@
 package com.starter.pojo;
 
-import java.sql.Timestamp;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -8,7 +7,6 @@ import javax.persistence.Id;
 @Entity(name="result_fra")
 public class FRADataDb {
 	@Id
-//	Timestamp currentTime;
 	private int transId;
 
 	double principal;

@@ -1,9 +1,6 @@
 package com.starter.services;
 
 
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
-
 import com.starter.pojo.Parameters_fx;
 import com.starter.pojo.Random_Values_fx;
 import com.starter.pojo.Result_fx;

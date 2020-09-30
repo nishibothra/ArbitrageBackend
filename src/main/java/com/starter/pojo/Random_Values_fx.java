@@ -1,7 +1,5 @@
 package com.starter.pojo;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 
 
 public class Random_Values_fx {

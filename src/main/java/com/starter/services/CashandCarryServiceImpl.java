@@ -1,7 +1,6 @@
 package com.starter.services;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -29,7 +28,6 @@ public class CashandCarryServiceImpl implements CashandCarryService{
 
 	@Override
     public CashAndCarry arbitrage() {
-		// TODO Auto-generated method stub
 		stockamt=3000.0;
 		bid_spotPrice=randomValueGenerator(3154,3172);
 		ask_spotPrice=randomValueGenerator(bid_spotPrice+1,3175);
@@ -41,7 +39,7 @@ public class CashandCarryServiceImpl implements CashandCarryService{
 		CashAndCarry cc = new CashAndCarry(bid_spotPrice,ask_spotPrice,bid_futurePrice,ask_futurePrice,dur,bid_ROI,ask_ROI);
 		cc.setLot_size(stockamt);
 		cc.setBrokerage(0.2);
-		//c and c
+	
 		double duration= dur/12;
 		double Amtborrow=ask_spotPrice*stockamt;      
 		double CostofBorrowing = Amtborrow*(ask_ROI*duration)/100.0;   
@@ -57,7 +55,7 @@ public class CashandCarryServiceImpl implements CashandCarryService{
 			rsb.setTransId(++trans_Id);
 			cacrepo.save(rsb);
 			}
-		//reverse c and c
+
 		else {
 			double Short = stockamt*bid_spotPrice;       
 			double ProfitLend=(Short*bid_ROI*duration)/100.0;   
@@ -65,8 +63,7 @@ public class CashandCarryServiceImpl implements CashandCarryService{
 			Arbitrage= Math.round((Gain + ProfitLend - (brokerage*Short))*1000.0)/1000.0;
 
 			if(Arbitrage>0) {
-				//cc.setArbitrage("Arbitrage possible- Reverse Cash and Carry");
-				//cc.setProfit(Arbitrage);
+			
 				arbitragetype="Arbitrage is possible-Reverse Cash and Carry";
 				cc.setArbitrage(arbitragetype);
 				cc.setProfit(Arbitrage);
@@ -87,7 +84,7 @@ public class CashandCarryServiceImpl implements CashandCarryService{
 	
 	@Override
 	public CashAndCarry Calculator(CashAndCarry cc) {
-		// TODO Auto-generated method stub
+	
 		bid_spotPrice=cc.getBid_spotPrice();
 		ask_spotPrice=cc.getAsk_spotPrice(); 
 		bid_futurePrice=cc.getBid_futurePrice();
@@ -98,7 +95,7 @@ public class CashandCarryServiceImpl implements CashandCarryService{
 		
 		stockamt=cc.getLot_size();
 		brokerage=cc.getBrokerage()/100;
-		//c and c
+
 		double duration= dur/12;
 		double Amtborrow=ask_spotPrice*stockamt;      
 		double CostofBorrowing = Amtborrow*(ask_ROI*duration);   
@@ -109,10 +106,10 @@ public class CashandCarryServiceImpl implements CashandCarryService{
 		if(Arbitrage>0) {
 			cc.setArbitrage("Arbitrage possible- Cash and Carry");
 			cc.setProfit(Arbitrage);	
-			//flag= addRecord(cc,db1);
+	
 			
 			}
-		//reverse c and c
+		
 		else {
 			double Short = stockamt*bid_spotPrice;       
 			double ProfitLend=Short*bid_ROI*duration;   
@@ -123,8 +120,6 @@ public class CashandCarryServiceImpl implements CashandCarryService{
 				if(Arbitrage>0) {
 					cc.setArbitrage("Arbitrage possible- Rverse Cash and Carry");
 					cc.setProfit(Arbitrage);
-					//flag= addRecord(cc,db1);
-					//System.out.println(flag);
 					
 				
 									}
@@ -137,13 +132,13 @@ public class CashandCarryServiceImpl implements CashandCarryService{
 	
 @Override
 public double randomValueGenerator(double min, double max) {
-	// TODO Auto-generated method stub
+	
 	return  min+ (int)(Math.random() * ((max - min) + 1));
 }
 	
 @Override
 public void monthAndRate() {
-	// TODO Auto-generated method stub
+
 	if(Math.random()<0.5) {
 		dur=3;
 		bid_ROI=3.8;
@@ -155,20 +150,4 @@ public void monthAndRate() {
 		ask_ROI=8.0;
 	}
 }
-/*
-@Override
-public int addRecord(CashAndCarry cc,ResultCAC_db db1) {
-	// TODO Auto-generated method stub
-	int added = 0;
-	
-	
-	String insertRecord = "insert into cacarbitrage values(?,?,?,?,?,?,?,?,?,?,?,?)";
-	added=template.update(insertRecord,db1.getTransId(), cc.getBid_spotPrice(),cc.getAsk_spotPrice(),cc.getBid_futurePrice(),cc.getAsk_futurePrice(),
-			cc.getBid_rfr(),cc.getAsk_rfr(),cc.getDuration(),cc.getLot_size(),cc.getBrokerage(),cc.getProfit(),cc.getArbitrage());
-	
-	return added;
-
-
-}*/
-	
 }

@@ -1,7 +1,5 @@
 package com.starter.services;
 
-import java.util.List;
-import org.springframework.stereotype.Component;
 
 import com.starter.pojo.CashAndCarry;
 

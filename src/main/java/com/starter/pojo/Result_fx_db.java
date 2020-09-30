@@ -11,7 +11,6 @@ import javax.persistence.Id;
 public class Result_fx_db {
 	
 	@Id
-//	@GeneratedValue(strategy = GenerationType.AUTO)
 	private double transId;
 	
 	private double bid_spot,ask_spot,bid_3m,ask_3m,int_c1_bid,int_c2_ask,int_c1_ask,int_c2_bid;
