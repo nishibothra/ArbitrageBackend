@@ -15,7 +15,7 @@ public class CashAndCarry {
 
 	}
 
-	public CashAndCarry(double bsp, double asp,double bfp, double afp, double d,double brate,double arate) {
+	public CashAndCarry(double bsp, double asp,double bfp, double afp, double d,double brate,double arate,double lotsize,double brk) {
 		bid_spotPrice= bsp;
 		ask_spotPrice=asp;
 		bid_futurePrice = bfp;
@@ -23,6 +23,8 @@ public class CashAndCarry {
 		duration=d;
 		bid_rfr=brate;
 		ask_rfr=arate;
+		lot_size=lotsize;
+		brokerage=brk;
 	  }
 	
 	public double getBid_spotPrice() {
