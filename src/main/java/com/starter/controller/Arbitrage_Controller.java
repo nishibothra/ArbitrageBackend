@@ -18,10 +18,12 @@ import com.starter.pojo.FRAData;
 import com.starter.pojo.FRADataDb;
 import com.starter.pojo.Parameters_fx;
 import com.starter.pojo.Random_Values_fx;
+import com.starter.pojo.ResultCAC_db;
 import com.starter.pojo.Result_fx;
 import com.starter.pojo.Result_fx_db;
 import com.starter.pojo.User_Calc_Input_fx;
 import com.starter.randomdata.DataGenerator;
+import com.starter.repo.CAC_Repo;
 import com.starter.repo.FRARepo;
 import com.starter.repo.ForexRepo;
 import com.starter.services.ForexService;
@@ -36,6 +38,9 @@ public class Arbitrage_Controller {
 
 	@Autowired
 	com.starter.services.CashandCarryService cac;
+	@Autowired
+	 CAC_Repo cac_repo;
+
 	
 	
 	@GetMapping("/cac")
@@ -51,6 +56,14 @@ public class Arbitrage_Controller {
 		
 		return cac.Calculator(c);
 	}
+	
+	@GetMapping("/cac/history")
+	public Iterable<ResultCAC_db> cac_history() {
+	//	List<ResultCAC_db> res =  cac_repo.findAll();
+		List<ResultCAC_db> top3 = cac_repo.findTop5ByOrderByTransIdDesc();
+		return top3;
+}
+
 	
 
 	@Autowired
