@@ -28,8 +28,9 @@ public class CashandCarryServiceImpl implements CashandCarryService{
 
 	@Override
     public CashAndCarry arbitrage() {
-		stockamt=3000.0;
-		brokerage=0.2;
+		
+		brokerage=ranValGen(0.15, 0.3);
+		stockamt=randomValueGenerator(2500, 3000);
 		bid_spotPrice=randomValueGenerator(3154,3172);
 		ask_spotPrice=randomValueGenerator(bid_spotPrice+1,3175);
 		bid_futurePrice=randomValueGenerator(3180,3240);
@@ -44,7 +45,7 @@ public class CashandCarryServiceImpl implements CashandCarryService{
 		double CostofBorrowing = Amtborrow*(ask_ROI*duration)/100.0;   
 		double FutureCost = bid_futurePrice*stockamt;            
 		double Gain = FutureCost-Amtborrow;                  
-		Arbitrage=  Math.round( (Gain-(CostofBorrowing+(brokerage*Amtborrow)))* 100.0) / 100.0;     
+		Arbitrage=  Math.round( (Gain-(CostofBorrowing+(brokerage/100*Amtborrow)))* 100.0) / 100.0;     
 		if(Arbitrage>0) {
 			arbitragetype="Arbitrage is possible-Cash and Carry";
 			cc.setArbitrage(arbitragetype);
@@ -59,7 +60,7 @@ public class CashandCarryServiceImpl implements CashandCarryService{
 			double Short = stockamt*bid_spotPrice;       
 			double ProfitLend=(Short*bid_ROI*duration)/100.0;   
 			Gain = stockamt * (bid_spotPrice-ask_futurePrice);
-			Arbitrage= Math.round((Gain + ProfitLend - (brokerage*Short))*100.0)/100.0;
+			Arbitrage= Math.round((Gain + ProfitLend - (brokerage/100*Short))*100.0)/100.0;
 
 			if(Arbitrage>0) {
 			
@@ -134,6 +135,14 @@ public double randomValueGenerator(double min, double max) {
 	
 	return  min+ (int)(Math.random() * ((max - min) + 1));
 }
+
+@Override
+public double ranValGen(double min, double max) {
+	
+	return Math.round((Math.random() * (max-min) + min)*100.0)/100.0;
+	
+}
+ 
 	
 @Override
 public void monthAndRate() {
