@@ -38,8 +38,9 @@ public class Arbitrage_Controller {
 
 	@Autowired
 	com.starter.services.CashandCarryService cac;
+	
 	@Autowired
-	 CAC_Repo cac_repo;
+	CAC_Repo cac_repo;
 
 	
 	

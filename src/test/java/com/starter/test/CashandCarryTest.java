@@ -35,9 +35,11 @@ public class CashandCarryTest {
 		
 		CashAndCarry c= new CashAndCarry(500,502,520,523,3,8.8,9,1.0,0.2);
 		CashAndCarry c1=cacService.Calculator(c);
-		//System.out.println(c1.getProfit());
-		//System.out.println(c1.getBrokerage());
-		assertEquals(5.701, c1.getProfit(), 0);
+		assertEquals(5.70, c1.getProfit(), 0);
+		
+		CashAndCarry cc= new CashAndCarry(3161,3166,3190,3245,3,3.8,4,3000,0.2);
+		CashAndCarry c2=cacService.Calculator(cc);
+		assertEquals("Arbitrage not  possible", c2.getArbitrage());
 		
 		
 	}
