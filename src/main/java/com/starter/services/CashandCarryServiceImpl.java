@@ -1,7 +1,5 @@
 package com.starter.services;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -28,9 +26,8 @@ public class CashandCarryServiceImpl implements CashandCarryService{
 
 	@Override
     public CashAndCarry arbitrage() {
-		
+		stockamt=randomValueGenerator(2500,3000);
 		brokerage=ranValGen(0.15, 0.3);
-		stockamt=randomValueGenerator(2500, 3000);
 		bid_spotPrice=randomValueGenerator(3154,3172);
 		ask_spotPrice=randomValueGenerator(bid_spotPrice+1,3175);
 		bid_futurePrice=randomValueGenerator(3180,3240);
@@ -39,7 +36,6 @@ public class CashandCarryServiceImpl implements CashandCarryService{
 		monthAndRate();
 		
 		CashAndCarry cc = new CashAndCarry(bid_spotPrice,ask_spotPrice,bid_futurePrice,ask_futurePrice,dur,bid_ROI,ask_ROI,stockamt,brokerage);
-		
 		double duration= dur/12;
 		double Amtborrow=ask_spotPrice*stockamt;      
 		double CostofBorrowing = Amtborrow*(ask_ROI*duration)/100.0;   
@@ -135,14 +131,6 @@ public double randomValueGenerator(double min, double max) {
 	
 	return  min+ (int)(Math.random() * ((max - min) + 1));
 }
-
-@Override
-public double ranValGen(double min, double max) {
-	
-	return Math.round((Math.random() * (max-min) + min)*100.0)/100.0;
-	
-}
- 
 	
 @Override
 public void monthAndRate() {
@@ -157,5 +145,11 @@ public void monthAndRate() {
 		bid_ROI=7.8;
 		ask_ROI=8.0;
 	}
+}
+
+@Override
+public double ranValGen(double min, double max) {
+	// TODO Auto-generated method stub
+	return Math.round((Math.random() * (max-min) + min)*100.0)/100.0;
 }
 }
