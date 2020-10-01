@@ -137,13 +137,13 @@ public void monthAndRate() {
 
 	if(Math.random()<0.5) {
 		dur=3;
-		bid_ROI=3.8;
-		ask_ROI=4.0;
+		bid_ROI=Math.round((Math.random() * (3.8-(-1.5)) + (-1.5))*100.0)/100.0;
+		ask_ROI=Math.round((Math.random() * (4-(bid_ROI)) + (bid_ROI))*100.0)/100.0;;
 	}
 	else {
 		dur=6;
-		bid_ROI=7.8;
-		ask_ROI=8.0;
+		bid_ROI=Math.round((Math.random() * (7.8-4) + (4))*100.0)/100.0;
+		ask_ROI=Math.round((Math.random() * (8-bid_ROI) + (bid_ROI))*100.0)/100.0;
 	}
 }
 
