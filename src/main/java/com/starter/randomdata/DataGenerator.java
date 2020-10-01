@@ -17,9 +17,9 @@ public class DataGenerator {
 		Random random = new Random();
 		
 		data.setPrincipleAmount(Math.pow(10, 2 + random.nextInt(7)));
-		data.setTransactionCost(data.getPrincipleAmount()*0.001);
+		data.setTransactionCost(0.1);
 
-		Double sixMBid = 0.5 + (1.3 - 0.5) * random.nextDouble();
+		Double sixMBid = -1.0 + (2.5 + 1) * random.nextDouble();
 		Double sixMAsk = sixMBid + 0.05 + (0.2) * random.nextDouble();
 
 		data.setSixMonthsSpotAsk(sixMAsk);

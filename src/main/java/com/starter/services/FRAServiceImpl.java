@@ -26,7 +26,7 @@ public class FRAServiceImpl implements FRAService {
 		double getAfterSix = data.getPrincipleAmount() * (1 + (data.getSixMonthsSpotBid()) / 200);
 		double getAfterTwel = getAfterSix * (1 + (data.getSixBytwelveFRBid()) / 200);
 
-		data.setGainLossLongBorrow(getAfterTwel - retAfterTwel - data.getTransactionCost());
+		data.setGainLossLongBorrow(getAfterTwel - retAfterTwel - (data.getTransactionCost()*data.getPrincipleAmount()/100));
 		if(data.getGainLossLongBorrow()>0.0001) data.setIsArbitrageLongBorrow(true);
 		
 		
@@ -35,7 +35,7 @@ public class FRAServiceImpl implements FRAService {
 		data.setGainLossLongBorrow(Double.parseDouble(df.format(data.getGainLossLongBorrow())));
 		
 		data.setPrincipleAmount(Double.parseDouble(df.format(data.getPrincipleAmount())));
-		data.setTransactionCost(Double.parseDouble(df.format(data.getTransactionCost())));
+		data.setTransactionCost(Double.parseDouble(df.format(data.getTransactionCost()*data.getPrincipleAmount()/100)));
 		data.setSixByTwelveFRAsk(Double.parseDouble(df.format(data.getSixByTwelveFRAsk())));
 		data.setSixBytwelveFRBid(Double.parseDouble(df.format(data.getSixBytwelveFRBid())));
 		data.setSixMonthsSpotAsk(Double.parseDouble(df.format(data.getSixMonthsSpotAsk())));
@@ -56,7 +56,7 @@ public class FRAServiceImpl implements FRAService {
 		double getAfterTwel = data.getPrincipleAmount() * (1 + (data.getTwelveMonthSpotBid()) / 100);
 		double retAfterSix = data.getPrincipleAmount() * (1 + (data.getSixMonthsSpotAsk()) / 200);
 		double retAfterTwel = retAfterSix * (1 + (data.getSixByTwelveFRAsk()) / 200);
-		data.setGainLossLongLend(getAfterTwel - retAfterTwel - data.getTransactionCost());
+		data.setGainLossLongLend(getAfterTwel - retAfterTwel - (data.getTransactionCost()*data.getPrincipleAmount()/100));
 		
 		if(data.getGainLossLongLend()>0.0001) data.setIsArbitrageLongLend(true);
 		
