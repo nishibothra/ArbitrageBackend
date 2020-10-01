@@ -9,17 +9,7 @@ public class User_Calc_Input_fx {
 	private double amount;
 	private String c1;
 	private String c2;
-	public User_Calc_Input_fx(Parameters_fx bid_ask, Parameters_fx bid_ask_3, Parameters_fx int_c1, Parameters_fx int_c2,
-			double amount, String c1, String c2) {
-		super();
-		this.bid_ask = bid_ask;
-		this.bid_ask_3 = bid_ask_3;
-		this.int_c1 = int_c1;
-		this.int_c2 = int_c2;
-		this.amount = amount;
-		this.c1 = c1;
-		this.c2 = c2;
-	}
+	private double transCost;
 	public Parameters_fx getBid_ask() {
 		return bid_ask;
 	}
@@ -62,6 +52,26 @@ public class User_Calc_Input_fx {
 	public void setC2(String c2) {
 		this.c2 = c2;
 	}
+	public double getTransCost() {
+		return transCost;
+	}
+	public void setTransCost(double transCost) {
+		this.transCost = transCost;
+	}
+	public User_Calc_Input_fx(Parameters_fx bid_ask, Parameters_fx bid_ask_3, Parameters_fx int_c1,
+			Parameters_fx int_c2, double amount, String c1, String c2, double transCost) {
+		super();
+		this.bid_ask = bid_ask;
+		this.bid_ask_3 = bid_ask_3;
+		this.int_c1 = int_c1;
+		this.int_c2 = int_c2;
+		this.amount = amount;
+		this.c1 = c1;
+		this.c2 = c2;
+		this.transCost = transCost;
+	}
+	 
+	
 	
 	
 		

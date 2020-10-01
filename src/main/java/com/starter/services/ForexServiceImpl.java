@@ -74,6 +74,7 @@ public class ForexServiceImpl implements ForexService {
 	    c1_eqv_invest_r = c2_to_c1_r + (c2_to_c1_r * (int_c1_bid/400));
 	    final_amt_r = c1_eqv_invest_r * bid_3m;
 	   
+	    cost = 0.0005 * amount;
 	    String result="";
 	    double fx_p_l=0;
 	    String choice="";
@@ -132,6 +133,8 @@ public class ForexServiceImpl implements ForexService {
 	    c1_eqv_invest_r = c2_to_c1_r + (c2_to_c1_r * (ucl.getInt_c1().getBid()/400));
 	    final_amt_r = c1_eqv_invest_r * ucl.getBid_ask_3().getBid(); 
 		
+	    cost = (ucl.getTransCost()*ucl.getAmount()/100);
+	    
 	    String result="";
 	    double fx_p_l=0;
 	    String choice="";
