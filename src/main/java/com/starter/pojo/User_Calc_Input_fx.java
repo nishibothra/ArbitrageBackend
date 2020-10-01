@@ -10,6 +10,7 @@ public class User_Calc_Input_fx {
 	private String c1;
 	private String c2;
 	private double transCost;
+	private double monthDuration;
 	public Parameters_fx getBid_ask() {
 		return bid_ask;
 	}
@@ -58,8 +59,14 @@ public class User_Calc_Input_fx {
 	public void setTransCost(double transCost) {
 		this.transCost = transCost;
 	}
+	public double getMonthDuration() {
+		return monthDuration;
+	}
+	public void setMonthDuration(double monthDuration) {
+		this.monthDuration = monthDuration;
+	}
 	public User_Calc_Input_fx(Parameters_fx bid_ask, Parameters_fx bid_ask_3, Parameters_fx int_c1,
-			Parameters_fx int_c2, double amount, String c1, String c2, double transCost) {
+			Parameters_fx int_c2, double amount, String c1, String c2, double transCost, double monthDuration) {
 		super();
 		this.bid_ask = bid_ask;
 		this.bid_ask_3 = bid_ask_3;
@@ -69,8 +76,10 @@ public class User_Calc_Input_fx {
 		this.c1 = c1;
 		this.c2 = c2;
 		this.transCost = transCost;
+		this.monthDuration = monthDuration;
 	}
-	 
+	
+	
 	
 	
 	

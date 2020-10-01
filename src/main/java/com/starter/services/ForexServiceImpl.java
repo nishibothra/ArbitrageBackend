@@ -80,7 +80,7 @@ public class ForexServiceImpl implements ForexService {
 	    String choice="";
 	    if(final_amt > (amt_to_return + cost )) {
 	    	
-	    	result = "Arbitrage possible with profit";
+	    	result = "Arbitrage possible";
 	    	ans.setResult(result);
 	    	choice = "Borrow in EUR and Invest In USD";
 	    	ans.setChoice(choice);
@@ -92,7 +92,7 @@ public class ForexServiceImpl implements ForexService {
 	    }
 	    else if((final_amt_r > (amt_to_return_r + cost ))) {
 	    	
-	    	result = "Revese Arbitrage possible with profit";
+	    	result = "Revese Arbitrage posssible";
 	    	ans.setResult(result);
 	    	choice = "Borrow in USD and Invest In EUR";
 	    	ans.setChoice(choice);
@@ -103,7 +103,7 @@ public class ForexServiceImpl implements ForexService {
 
 	    }
 	    else {
-	    	result = "No arbitrage possible loss";
+	    	result = "No arbitrage possible ";
 	    	choice=  "";
 	    	fx_p_l =  -Double.parseDouble(df2.format((amt_to_return+cost) -final_amt));;
 	    }
@@ -121,16 +121,16 @@ public class ForexServiceImpl implements ForexService {
 		double cost =0;
 		double amt_to_return_r=0,c2_to_c1_r=0,c1_eqv_invest_r=0,final_amt_r=0;
 		
-		amt_to_return = ucl.getAmount() + (ucl.getAmount() * (ucl.getInt_c1().getAsk()/400));
+		amt_to_return = ucl.getAmount() + (ucl.getAmount() * (ucl.getInt_c1().getAsk()/(1200/ucl.getMonthDuration())));
 		c1_to_c2 = ucl.getAmount()*ucl.getBid_ask().getBid();
-		 c2_eqv_invest = c1_to_c2 + (c1_to_c2 * (ucl.getInt_c2().getBid()/400));
+		 c2_eqv_invest = c1_to_c2 + (c1_to_c2 * (ucl.getInt_c2().getBid()/(1200/ucl.getMonthDuration())));
 		final_amt = c2_eqv_invest / ucl.getBid_ask_3().getAsk();
 		
 	
 		
-		amt_to_return_r = ucl.getAmount() + (ucl.getAmount() * (ucl.getInt_c2().getAsk()/400));
+		amt_to_return_r = ucl.getAmount() + (ucl.getAmount() * (ucl.getInt_c2().getAsk()/(1200/ucl.getMonthDuration())));
 	    c2_to_c1_r = ucl.getAmount()/ucl.getBid_ask().getAsk();
-	    c1_eqv_invest_r = c2_to_c1_r + (c2_to_c1_r * (ucl.getInt_c1().getBid()/400));
+	    c1_eqv_invest_r = c2_to_c1_r + (c2_to_c1_r * (ucl.getInt_c1().getBid()/(1200/ucl.getMonthDuration())));
 	    final_amt_r = c1_eqv_invest_r * ucl.getBid_ask_3().getBid(); 
 		
 	    cost = (ucl.getTransCost()*ucl.getAmount()/100);
@@ -140,7 +140,7 @@ public class ForexServiceImpl implements ForexService {
 	    String choice="";
 	    if(final_amt > (amt_to_return + cost)) {
 	    	
-	    	result = "Arbitrage possible with profit";
+	    	result = "Arbitrage possible ";
 	    	choice = "Borrow in: " +ucl.getC1() + " and Invest In: " +ucl.getC2();
 	    	fx_p_l = Double.parseDouble(df2.format(final_amt-(amt_to_return+cost)));
 	    	
@@ -149,7 +149,7 @@ public class ForexServiceImpl implements ForexService {
 	    }
 	    else if((final_amt_r > (amt_to_return_r + cost))) {
 	    	
-	    	result = "Arbitrage possible with profit"; 
+	    	result = "Arbitrage possible"; 
 	    	choice = "Borrow in: " +ucl.getC2() + " and Invest In: " +ucl.getC1();
 	    	fx_p_l =  Double.parseDouble(df2.format(final_amt_r-(amt_to_return_r+cost)));
 	    	
@@ -157,7 +157,7 @@ public class ForexServiceImpl implements ForexService {
 
 	    }
 	    else {
-	    	result = "No arbitrage possible loss";
+	    	result = "No arbitrage possible";
 	    	choice=  "";
 	    	fx_p_l = - Double.parseDouble(df2.format((amt_to_return+cost) -final_amt));;
 	    	
