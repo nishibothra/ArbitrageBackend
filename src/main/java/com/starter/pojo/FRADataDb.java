@@ -6,6 +6,7 @@ import javax.persistence.Id;
 
 @Entity(name="result_fra")
 public class FRADataDb {
+	
 	@Id
 	private int transId;
 

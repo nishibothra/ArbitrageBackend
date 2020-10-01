@@ -8,4 +8,6 @@ public interface FRAService {
 	public FRAData calculateGainLossLongLend(FRAData data);
 	public FRAData calculateUserInLongLend(FRAData data);
 	public FRAData calculateUserInLongBorrow(FRAData data);
+	public void saveFraData(FRAData data);
+	
 }

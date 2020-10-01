@@ -17,6 +17,7 @@ public class FRAServiceImpl implements FRAService {
 
 	@Autowired
 	FRARepo fraRepo;
+	
 	private static int transid=0;
 	@Override
 	public FRAData calculateGainLossLongBorrow(FRAData data) {
@@ -44,19 +45,6 @@ public class FRAServiceImpl implements FRAService {
 		
 		
 		
-		if(data.getIsArbitrageLongBorrow()) {
-			FRADataDb fra = new FRADataDb();
-			fra.setTransId(++transid);
-			fra.setPrincipal(data.getPrincipleAmount());
-			fra.setSpot_6m(data.getSixMonthsSpotBid());
-			fra.setSpot_12m(data.getTwelveMonthSpotAsk());
-			
-			fra.setForward_6_12m(data.getSixBytwelveFRBid());
-			fra.setSubtype("Long Borrow");
-			fra.setProfit(data.getGainLossLongBorrow());
-			System.out.println("history : "+fra.toString());
-			fraRepo.save(fra);
-		}
 		
 
 		return data;
@@ -76,21 +64,7 @@ public class FRAServiceImpl implements FRAService {
 		df.setRoundingMode(RoundingMode.FLOOR);
 		data.setGainLossLongLend(Double.parseDouble(df.format(data.getGainLossLongLend())));
 
-		if(data.getIsArbitrageLongLend()) {
-			FRADataDb fra = new FRADataDb();
-			Date date =new Date();
-			Timestamp tm = new Timestamp(date.getTime());
-			fra.setTransId(++transid);
-			
-			fra .setPrincipal(data.getPrincipleAmount());
-			fra.setSpot_6m(data.getSixMonthsSpotAsk());
-			fra.setSpot_12m(data.getTwelveMonthSpotBid());
-			
-			fra.setForward_6_12m(data.getSixByTwelveFRAsk());
-			fra.setSubtype("Long Lend");
-			fra.setProfit(data.getGainLossLongLend());
-			fraRepo.save(fra);
-		}
+		
 		
 		return data;
 	}
@@ -120,6 +94,42 @@ public class FRAServiceImpl implements FRAService {
 		
 	
 		return data;
+	}
+
+	@Override
+	public void saveFraData(FRAData data) {
+		// TODO Auto-generated method stub
+		if(data.getIsArbitrageLongBorrow()) {
+			FRADataDb fra = new FRADataDb();
+			fra.setTransId(++transid);
+			fra.setPrincipal(data.getPrincipleAmount());
+			fra.setSpot_6m(data.getSixMonthsSpotBid());
+			fra.setSpot_12m(data.getTwelveMonthSpotAsk());
+			
+			fra.setForward_6_12m(data.getSixBytwelveFRBid());
+			fra.setSubtype("Long Borrow");
+			fra.setProfit(data.getGainLossLongBorrow());
+			System.out.println("history : "+fra.toString());
+			fraRepo.save(fra);
+		}
+		if(data.getIsArbitrageLongLend()) {
+			FRADataDb fra = new FRADataDb();
+			Date date =new Date();
+			Timestamp tm = new Timestamp(date.getTime());
+			fra.setTransId(++transid);
+			
+			fra .setPrincipal(data.getPrincipleAmount());
+			fra.setSpot_6m(data.getSixMonthsSpotAsk());
+			fra.setSpot_12m(data.getTwelveMonthSpotBid());
+			
+			fra.setForward_6_12m(data.getSixByTwelveFRAsk());
+			fra.setSubtype("Long Lend");
+			fra.setProfit(data.getGainLossLongLend());
+			fraRepo.save(fra);
+		}
+		
+		
+		
 	}
 
 	

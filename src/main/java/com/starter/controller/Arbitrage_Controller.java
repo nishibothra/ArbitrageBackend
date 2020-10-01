@@ -110,6 +110,7 @@ public class Arbitrage_Controller {
 	public FRAData getArb() {
 		FRAData d = cal.calculateGainLossLongBorrow(dg.getRandomData(new FRAData()));
 		d=cal.calculateGainLossLongLend(d);
+		cal.saveFraData(d);
 		return d;
 
 	}
